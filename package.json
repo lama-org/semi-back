@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:dev": "nodemon --config ./nodemon.json",
+    "start:dev": "nodemon --exec ts-node ./src/index.ts",
     "build": "rd /s ./build && tsc",
     "start": "set NODE_ENV=production&& node build/app.js"
   },
@@ -23,12 +23,16 @@
     "@babel/core": "^7.15.0",
     "@babel/node": "^7.14.9",
     "@babel/preset-env": "^7.15.0",
-    "@types/node": "^16.6.1",
+    "@graphql-tools/load-files": "^6.3.2",
+    "@graphql-tools/merge": "^8.0.2",
+    "@graphql-tools/schema": "^8.1.2",
     "apollo-server": "^3.1.2",
     "graphql": "^15.5.1",
+    "graphql-tools": "^8.1.0",
     "ts-node": "^10.2.0"
   },
   "devDependencies": {
+    "@types/node": "^16.7.1",
     "@typescript-eslint/eslint-plugin": "^4.29.2",
     "@typescript-eslint/parser": "^4.29.2",
     "eslint": "^7.32.0",
