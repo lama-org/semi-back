@@ -10,11 +10,9 @@ const allTypes = loadFilesSync(path.join(__dirname, '../api/**/*.graphql'));
 const allResolvers = loadFilesSync(path.join(__dirname, '../api/**/*.ts'));
 
 // 스키마 생성
-const schema = makeExecutableSchema({
+export const schema = makeExecutableSchema({
   // 가져온 graphql 타입들을 하나로 합쳐줌
   typeDefs: mergeTypeDefs(allTypes),
   // 가져온 resover 함수들을 하나로 합쳐줌
   resolvers: mergeResolvers(allResolvers),
 });
-
-module.exports = schema;

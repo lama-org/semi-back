@@ -1,6 +1,6 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 
-class TvAPI extends RESTDataSource {
+export default class TvAPI extends RESTDataSource {
   constructor() {
     super();
     this.baseURL = 'https://api.themoviedb.org/3/tv';
@@ -37,6 +37,3 @@ class TvAPI extends RESTDataSource {
     return results;
   }
 }
-
-module.exports = TvAPI;
-export {};
