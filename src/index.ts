@@ -1,6 +1,6 @@
 const { ApolloServer } = require('apollo-server');
 const schema = require('./config/schema');
-const TvAPI = require('./tv/tv-api');
+const TvAPI = require('./api/tv/tv-api');
 
 require('dotenv').config();
 
