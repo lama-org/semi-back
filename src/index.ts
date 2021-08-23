@@ -1,12 +1,11 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import { ApolloServer } from 'apollo-server';
-import TvAPI from './api/tv/tv-api';
-import { schema } from './schema';
+import { typeDefs, resolvers } from './schema';
 
 const server = new ApolloServer({
-  schema,
-  dataSources: () => ({
-    TvAPI: new TvAPI(),
-  }),
+  typeDefs,
+  resolvers,
 });
 
 server.listen().then(({ url }: any) => {

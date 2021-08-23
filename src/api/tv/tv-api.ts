@@ -1,39 +1,42 @@
-import { RESTDataSource } from 'apollo-datasource-rest';
+import axios, { AxiosResponse } from 'axios';
 
-export default class TvAPI extends RESTDataSource {
-  constructor() {
-    super();
-    this.baseURL = 'https://api.themoviedb.org/3/tv';
-  }
+const api_key = process.env.API_KEY;
 
-  getTvDetail = async (id: number) =>
-    await this.get(`/${id}`, {
-      api_key: process.env.API_KEY,
+const api = axios.create({
+  baseURL: 'https://api.themoviedb.org/3/tv',
+});
+
+export const getTvDetail = async (id: number): Promise<AxiosResponse> =>
+  await api.get(`/${id}`, {
+    params: {
+      api_key,
       language: 'ko-KR',
-    });
+    },
+  });
 
-  async getAiringToday(page = 1) {
-    const { results } = await this.get('/airing_today', {
-      api_key: process.env.API_KEY,
+export const getAiringToday = async (page = 1): Promise<AxiosResponse> =>
+  await api.get('/airing_today', {
+    params: {
+      api_key,
       language: 'ko-KR',
       page,
-    });
-    return results;
-  }
-  async getPopular(page = 1) {
-    const { results } = await this.get('/popular', {
-      api_key: process.env.API_KEY,
+    },
+  });
+
+export const getPopular = async (page = 1): Promise<AxiosResponse> =>
+  await api.get('/popular', {
+    params: {
+      api_key,
       language: 'ko-KR',
       page,
-    });
-    return results;
-  }
-  async getTopRated(page = 1) {
-    const { results } = await this.get('/top_rated', {
-      api_key: process.env.API_KEY,
+    },
+  });
+
+export const getTopRated = async (page = 1): Promise<AxiosResponse> =>
+  await api.get('/top_rated', {
+    params: {
+      api_key,
       language: 'ko-KR',
       page,
-    });
-    return results;
-  }
-}
+    },
+  });
