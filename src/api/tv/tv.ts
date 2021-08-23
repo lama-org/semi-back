@@ -1,6 +1,13 @@
 const resolvers = {
   Query: {
-    tvs: () => ([{title: '거침없이 코딩 중', releaseDate: '2021-08-22'}]),
+    airing_today: (_:any, { page }:any, { dataSources }:any) =>
+      dataSources.TvAPI.getAiringToday(page),
+    popular: (_:any, { page }:any, { dataSources }:any) =>
+      dataSources.TvAPI.getPopular(page),
+    top_rate: (_:any, { page }:any, { dataSources }:any) =>
+      dataSources.TvAPI.getTopRated(page),
+    tv_detail: (_:any, { id }:any, { dataSources }:any) =>
+      dataSources.TvAPI.getTvDetail(id)
   },
 };
 

@@ -1,8 +1,17 @@
 const { ApolloServer } = require('apollo-server')
-import schema from "./config/schema";
+const schema = require('./config/schema');
+const TvAPI = require('./tv/tv-api')
 
+require('dotenv').config()
 
-const server = new ApolloServer({ schema });
+const server = new ApolloServer(
+  { 
+    schema,
+    dataSources: () => ({
+      TvAPI: new TvAPI(),
+    })
+  }
+);
 
 server.listen().then(({ url }:any) => {
   console.log(`🚀  Server ready at ${url}`);
