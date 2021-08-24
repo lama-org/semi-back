@@ -1,4 +1,4 @@
-const books = [
+const booksResolvers = [
   {
     title: '아프리카 청춘이다',
     releaseDate: '2010-02-20',
@@ -15,7 +15,7 @@ const books = [
 
 const resolvers = {
   Query: {
-    books: () => books,
+    books: () => booksResolvers,
   },
 };
 

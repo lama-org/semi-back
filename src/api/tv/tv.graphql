@@ -1,8 +1,0 @@
-type Tv {
-  title: String
-  releaseDate: String
-}
-
-type Query {
-  tvs: [Tv]
-}

@@ -1,9 +1,13 @@
-const { ApolloServer } = require('apollo-server')
-import schema from "./config/schema";
+import dotenv from 'dotenv';
+dotenv.config();
+import { ApolloServer } from 'apollo-server';
+import { typeDefs, resolvers } from './schema';
 
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+});
 
-const server = new ApolloServer({ schema });
-
-server.listen().then(({ url }:any) => {
+server.listen().then(({ url }: any) => {
   console.log(`🚀  Server ready at ${url}`);
 });
