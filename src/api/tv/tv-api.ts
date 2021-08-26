@@ -40,3 +40,19 @@ export const getTopRated = async (page = 1): Promise<AxiosResponse> =>
       page,
     },
   });
+
+export const getTvSeasonDetail = async (id: number, season: number): Promise<AxiosResponse> =>
+  await api.get(`/${id}/season/${season}`, {
+    params: {
+      api_key,
+      language: 'ko-KR',
+    },
+  });
+
+export const getTvEpisodesDetail = async (id: number, season: number, episode: number): Promise<AxiosResponse> =>
+  await api.get(`/${id}/season/${season}/episode/${episode}`, {
+    params: {
+      api_key,
+      language: 'ko-KR',
+    },
+  });
