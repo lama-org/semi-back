@@ -13,15 +13,6 @@ export default gql`
     vote_average: Float
   }
 
-  type TvDetail {
-    id: ID
-    name: String
-    overview: String
-    original_name: String
-    popularity: Float
-    vote_average: Float
-  }
-
   type TVResult {
     page: Int!
     results: [TV]
@@ -33,6 +24,5 @@ export default gql`
     airing_today(page: Int): TVResult
     popular(page: Int): TVResult
     top_rate(page: Int): TVResult
-    tv_detail(id: Int!): TvDetail
   }
 `;

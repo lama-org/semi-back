@@ -2,7 +2,8 @@ import { gql } from 'apollo-server';
 
 export default gql`
   type Movie {
-    id: ID
+    adult: Boolean
+    id: Int
     title: String
     original_title: String
     release_date: String
@@ -11,15 +12,10 @@ export default gql`
     backdrop_path: String
     popularity: Float
     vote_average: Float
-  }
-
-  type MovieDetail {
-    id: ID
-    title: String
-    overview: String
-    original_title: String
-    popularity: Float
-    vote_average: Float
+    genre_ids: [Int]
+    poster_path: String
+    video: Boolean
+    vote_count: Int
   }
 
   type MovieResult {
@@ -30,7 +26,6 @@ export default gql`
   }
 
   type Query {
-    movie_detail(id: Int!): MovieDetail
     now_playing(page: Int, region: String): MovieResult
     moviePopular(page: Int, region: String): MovieResult
     top_rated(page: Int, region: String): MovieResult
