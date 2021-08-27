@@ -1,4 +1,7 @@
 import { RequestOptions, RESTDataSource } from 'apollo-datasource-rest';
+import { TvDetail, TVResult } from './tv';
+import { SeasonDetail } from './seoson';
+import { Episode } from './epicode';
 
 export default class TvAPI extends RESTDataSource {
   constructor() {
@@ -33,32 +36,10 @@ export default class TvAPI extends RESTDataSource {
         page,
       },
     });
-}
 
-interface TV {
-  id: number;
-  name: string;
-  original_name: string;
-  first_air_date: string;
-  original_language: string;
-  overview: string;
-  backdrop_path: string;
-  popularity: number;
-  vote_average: number;
-}
+  getTvSeasonDetail = async (id: number, season: number): Promise<SeasonDetail> =>
+    await this.get(`/${id}/season/${season}`);
 
-interface TvDetail {
-  id: number;
-  name: string;
-  overview: string;
-  original_name: string;
-  popularity: number;
-  vote_average: number;
-}
-
-interface TVResult {
-  page: number;
-  results: [TV];
-  total_pages: number;
-  total_results: number;
+  getTvEpisodesDetail = async (id: number, season: number, episode: number): Promise<Episode> =>
+    await this.get(`/${id}/season/${season}/episode/${episode}`);
 }
