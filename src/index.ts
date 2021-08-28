@@ -1,19 +1,21 @@
 import dotenv from 'dotenv';
 dotenv.config();
+import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
-import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
-import { typeDefs, resolvers } from './schema';
+import schema from './schema';
+import { createServer } from 'http';
 import MovieAPI from './api/movie';
 import TvAPI from './api/tv';
-import express from 'express';
-import cors from 'cors';
 
-const PORT = process.env.PORT || 4000;
+const PORT: string = process.env.PORT || '0';
 
 async function startServer() {
+  const app = express();
+
+  const httpServer = createServer(app);
+
   const server = new ApolloServer({
-    typeDefs,
-    resolvers,
+    schema,
     introspection: true,
     dataSources: () => {
       return {
@@ -21,18 +23,14 @@ async function startServer() {
         tvAPI: new TvAPI(),
       };
     },
-    plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
   });
   await server.start();
 
-  const app = express();
-  app.use(cors());
-
   server.applyMiddleware({ app });
 
-  await new Promise((r: any) => app.listen({ port: PORT }, r));
-
-  console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`);
+  httpServer.listen(parseInt(PORT), () => {
+    console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`);
+  });
 }
 
 startServer().then();

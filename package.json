@@ -9,7 +9,9 @@
     "yarn": "1.x"
   },
   "scripts": {
-    "start": "nodemon --exec ts-node ./src/index.ts"
+    "start:dev": "nodemon --exec ts-node ./src/index.ts",
+    "build": "babel src --out-dir build --extensions '.ts,.js'",
+    "start": "node build/index"
   },
   "repository": {
     "type": "git",
@@ -22,9 +24,12 @@
     "url": "https://github.com/lama-org/semi-back/issues"
   },
   "dependencies": {
+    "@babel/cli": "^7.14.8",
     "@babel/core": "^7.15.0",
     "@babel/node": "^7.14.9",
+    "@babel/plugin-transform-runtime": "^7.15.0",
     "@babel/preset-env": "^7.15.0",
+    "@babel/preset-typescript": "^7.15.0",
     "@graphql-tools/load-files": "^6.3.2",
     "@graphql-tools/merge": "^8.0.2",
     "@graphql-tools/schema": "^8.1.2",
