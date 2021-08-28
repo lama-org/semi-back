@@ -9,9 +9,7 @@
     "yarn": "1.x"
   },
   "scripts": {
-    "start:dev": "nodemon --exec ts-node ./src/index.ts",
-    "build": "rd /s ./build && tsc",
-    "start": "set NODE_ENV=production&& node build/app.js"
+    "start": "nodemon --exec ts-node ./src/index.ts"
   },
   "repository": {
     "type": "git",
