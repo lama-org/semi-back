@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import { ApolloServer } from 'apollo-server-express';
+import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
 import { typeDefs, resolvers } from './schema';
 import MovieAPI from './api/movie';
 import TvAPI from './api/tv';
@@ -13,12 +14,14 @@ async function startServer() {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
+    introspection: true,
     dataSources: () => {
       return {
         movieAPI: new MovieAPI(),
         tvAPI: new TvAPI(),
       };
     },
+    plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
   });
   await server.start();
 
