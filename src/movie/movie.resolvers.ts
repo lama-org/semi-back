@@ -1,29 +1,45 @@
 import { IObjectTypeResolver } from '@graphql-tools/utils/Interfaces';
-import { getMovieDetail, getNowPlaying, getPopular, getTopRated, getUpcoming } from '../api/movie/movie-api';
+import { ApolloContext } from '../types';
 
 const resolvers = {
   Query: {
-    movie_detail: async (_, { id }: { id: number }) => {
-      const { data } = await getMovieDetail(id);
-      return data;
-    },
-    now_playing: async (_, { page, region }: { page: number, region: string }) => {
-      const { data } = await getNowPlaying(page, region);
-      return data;
-    },
-    moviePopular: async (_, { page, region }: { page: number, region: string }) => {
-      const { data } = await getPopular(page, region);
-      return data;
-    },
-    top_rated: async (_, { page, region }: { page: number, region: string }) => {
-      const { data } = await getTopRated(page, region);
-      return data;
-    },
-    upcoming: async (_, { page, region }: { page: number, region: string }) => {
-      const { data } = await getUpcoming(page, region);
-      return data;
-    },
-  } as IObjectTypeResolver,
+    now_playing: async (
+      _,
+      { page, region },
+      {
+        dataSources: {
+          movieAPI: { getNowPlaying },
+        },
+      },
+    ) => await getNowPlaying(page, region),
+    moviePopular: async (
+      _,
+      { page, region },
+      {
+        dataSources: {
+          movieAPI: { getPopular },
+        },
+      },
+    ) => await getPopular(page, region),
+    top_rated: async (
+      _,
+      { page, region },
+      {
+        dataSources: {
+          movieAPI: { getTopRated },
+        },
+      },
+    ) => await getTopRated(page, region),
+    upcoming: async (
+      _,
+      { page, region },
+      {
+        dataSources: {
+          movieAPI: { getUpcoming },
+        },
+      },
+    ) => await getUpcoming(page, region),
+  } as IObjectTypeResolver<any, ApolloContext, { page: number; region?: string }>,
 };
 
 export default resolvers;
